@@ -100,18 +100,21 @@ main > div > label {
 }
 
 main > div > select {
-    width: 300px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    width: 350px; /* Increased width */
+    padding: 15px; /* Increased padding */
+    font-size: 18px; /* Larger font size */
+    border: 2px solid #007acc; /* More distinct border */
+    border-radius: 8px; /* Slightly more rounded corners */
+    background-color: #f7f7f7; /* Light blue background */
     margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 main > div > select:focus {
     outline: none;
-    border-color: #007acc;
+    border-color: #005f99; /* Darker blue on focus */
+    box-shadow: 0 0 8px rgba(0, 95, 153, 0.5); /* Glow effect on focus */
 }
 
 #set-stats {

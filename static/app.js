@@ -43,30 +43,40 @@ async function displaySetStats(sets) {
 async function loadFlashcards() {
     const setSelect = document.getElementById("set-select");
     currentSetId = setSelect.value;
-    const selectedSetName = setSelect.options[setSelect.selectedIndex].text;
-    document.getElementById("set-title").textContent = selectedSetName;
     const response = await fetch(`/api/flashcards?set_id=${currentSetId}`);
     flashcards = await response.json();
     currentCardIndex = 0;
+    updateFlashcardCount(); // Update the count display
     showCard();
     disableAnswerButtons();
 }
 
+function updateFlashcardCount() {
+    const remaining = flashcards.length;
+    document.getElementById("set-title").textContent = `Pozostało słówek: ${remaining}`;
+}
+
 function showCard() {
     const cardDiv = document.getElementById("card");
+    const translationDiv = document.getElementById("translation");
     if (flashcards.length === 0) {
         cardDiv.textContent = "Brak fiszek w tym zestawie.";
+        translationDiv.textContent = ""; // Clear translation
+        translationDiv.classList.remove("visible"); // Hide translation
     } else {
         const card = flashcards[currentCardIndex];
         cardDiv.textContent = card.word_pl;
+        translationDiv.textContent = ""; // Clear translation
+        translationDiv.classList.remove("visible"); // Hide translation
     }
 }
 
 function showTranslation() {
     if (flashcards.length > 0) {
         const card = flashcards[currentCardIndex];
-        const cardDiv = document.getElementById("card");
-        cardDiv.textContent = card.word_en;
+        const translationDiv = document.getElementById("translation");
+        translationDiv.textContent = `Tłumaczenie: ${card.word_en}`; // Display translation
+        translationDiv.classList.add("visible"); // Add class to make it visible
         enableAnswerButtons();
         readAloud(card.word_en); // Read the English word aloud
     }
@@ -90,6 +100,7 @@ async function markKnown(known) {
         if (currentCardIndex >= flashcards.length) {
             currentCardIndex = 0;
         }
+        updateFlashcardCount(); // Update the count after answering
         showCard();
         disableAnswerButtons();
     }
