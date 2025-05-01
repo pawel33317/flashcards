@@ -1,0 +1,36 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nauka Fiszek</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
+        <h1 id="header-title">Fiszki</h1>
+    </header>
+    <main>
+        <div>
+            <label for="set-select">Wybierz zestaw:</label>
+            <select id="set-select" onchange="loadFlashcards()">
+                <!-- Options will be dynamically populated -->
+            </select>
+        </div>
+        <div id="flashcards">
+            <h2 id="set-title">Twoje fiszki</h2>
+            <div id="card"></div>
+            <div class="buttons">
+                <button onclick="showTranslation()">Pokaż tłumaczenie</button>
+                <button onclick="markKnown(true)">Znam</button>
+                <button onclick="markKnown(false)">Nie znam</button>
+            </div>
+        </div>
+        <div id="set-stats">
+            <!-- Statistics will be dynamically populated -->
+        </div>
+    </main>
+    <script src="static/app.js"></script>
+</body>
+</html>

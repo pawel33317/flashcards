@@ -1,0 +1,30 @@
+power shell as admin
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Tworzymy katalog na projekt
+mkdir flashcard-app
+cd flashcard-app
+
+# Tworzymy środowisko wirtualne
+python3 -m venv venv
+
+# Aktywujemy środowisko wirtualne
+# Na Windows
+venv\Scripts\activate
+# Na Linux/MacOS
+source venv/bin/activate
+
+
+python.exe -m pip install --upgrade pip
+pip install fastapi uvicorn 
+# pip install google-auth
+# pip install google-auth-oauthlib
+# pip install google-api-python-client
+
+
+cd backend
+python init_db.py
+
+cd ..
+# uvicorn backend.main:app --reload
+uvicorn main:app --reload

@@ -1,0 +1,214 @@
+/* frontend/style.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f8ff;
+    margin: 0;
+}
+
+header {
+    background: linear-gradient(135deg, #007acc, #005f99); /* Gradient background */
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    width: 600px; /* Match the width of #flashcards */
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
+    transform: rotate(45deg);
+    animation: header-glow 6s infinite linear;
+    z-index: 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1; /* Ensure text is above the glow effect */
+}
+
+@keyframes header-glow {
+    0% {
+        transform: rotate(45deg) translateX(0);
+    }
+    50% {
+        transform: rotate(45deg) translateX(50px);
+    }
+    100% {
+        transform: rotate(45deg) translateX(0);
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    gap: 20px;
+}
+
+#flashcards {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 600px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#flashcards h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #333;
+}
+
+#card {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #555;
+    min-height: 50px;
+}
+
+#menu {
+    display: none; /* Remove the left menu */
+}
+
+main > div > label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+    text-align: center;
+}
+
+main > div > select {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+main > div > select:focus {
+    outline: none;
+    border-color: #007acc;
+}
+
+#set-stats {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 600px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+#set-stats div {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#set-stats div hr {
+    margin: 5px 0;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005f99;
+}
+
+button:active {
+    background-color: #004c7a;
+}
+
+button:disabled {
+    background-color: #cccccc; /* Gray color for disabled state */
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Specific styles for "Znam" button */
+button[onclick="markKnown(true)"] {
+    background-color: #28a745; /* Nice green */
+}
+
+button[onclick="markKnown(true)"]:hover {
+    background-color: #218838; /* Darker green */
+}
+
+button[onclick="markKnown(true)"]:active {
+    background-color: #1e7e34; /* Even darker green */
+}
+
+/* Specific styles for "Nie znam" button */
+button[onclick="markKnown(false)"] {
+    background-color: #dc3545; /* Nice red */
+}
+
+button[onclick="markKnown(false)"]:hover {
+    background-color: #c82333; /* Darker red */
+}
+
+button[onclick="markKnown(false)"]:active {
+    background-color: #bd2130; /* Even darker red */
+}
+
+@media (max-width: 600px) {
+    #flashcards {
+        width: 100%;
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+    }
+}
