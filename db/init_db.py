@@ -26,6 +26,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     login TEXT NOT NULL UNIQUE,
+    name TEXT,
     password TEXT NOT NULL
 )
 """)

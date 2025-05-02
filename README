@@ -32,4 +32,4 @@ python init_db.py
 cd ..
 # uvicorn backend.main:app --reload
 uvicorn main:app --reload
-
+ uvicorn app:app --reload
