@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <header>
+    <header id="main-header">
         <h1 id="header-title">Flashcards</h1>
     </header>
     <main>
-        <div>
-            <label for="set-select">Wybierz zestaw:</label>
+        <div id="set-selection">
+            <label for="set-select">Zestaw:</label>
             <select id="set-select" onchange="loadFlashcards()">
                 <!-- Options will be dynamically populated -->
             </select>
@@ -30,6 +30,12 @@
         </div>
         <div id="set-stats">
             <!-- Statistics will be dynamically populated -->
+        </div>
+        <div id="shortcuts">
+            <h2>Skróty klawiaturowe:</h2>
+            <span><strong>Spacja:</strong> Pokaż tłumaczenie, </span>
+            <span><strong>1:</strong> Znam, </span>
+            <span><strong>2:</strong> Nie znam</span>
         </div>
     </main>
     <script src="static/app.js"></script>

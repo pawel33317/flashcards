@@ -2,14 +2,14 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
+    padding: 0px;
     background-color: #f0f8ff;
     margin: 0;
 }
 
 header {
-    background: linear-gradient(135deg, #007acc, #005f99); /* Gradient background */
-    color: white;
+    background: linear-gradient(135deg, #e6f7ff, #cceeff); /* Very light gradient background */
+    color: #333; /* Darker text for contrast */
     padding: 20px 0;
     margin-bottom: 20px;
     width: 600px; /* Match the width of #flashcards */
@@ -18,7 +18,7 @@ header {
     margin-right: auto;
     text-align: center;
     border-radius: 15px; /* More rounded corners */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
     position: relative;
     overflow: hidden;
 }
@@ -30,7 +30,7 @@ header::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 70%); /* Softer glow */
     transform: rotate(45deg);
     animation: header-glow 6s infinite linear;
     z-index: 0;
@@ -80,7 +80,7 @@ main {
 }
 
 #card {
-    margin: 20px 0;
+    margin: 0px 0;
     font-size: 18px;
     color: #555;
     min-height: 50px;
@@ -202,6 +202,121 @@ button[onclick="markKnown(false)"]:hover {
 
 button[onclick="markKnown(false)"]:active {
     background-color: #bd2130; /* Even darker red */
+}
+
+#translation {
+    margin-top: 0px; /* Increased top margin for better spacing */
+    margin-bottom: 20px; /* Added bottom margin for separation */
+    font-size: 18px; /* Increased font size for readability */
+    color: #333; /* Darker text color for contrast */
+    background-color: #f9f9f9; /* Light gray background */
+    padding: 15px; /* Added padding for better readability */
+    border: 2px solid #007acc; /* Blue border for emphasis */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    min-height: 20px;
+    transition: opacity 0.3s ease;
+    opacity: 0; /* Initially hidden */
+    visibility: hidden; /* Initially not visible */
+}
+
+#translation.visible {
+    opacity: 1; /* Make visible when translation is shown */
+    visibility: visible; /* Ensure visibility */
+}
+
+#set-selection {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 600px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0px; /* Add spacing below the container */
+    text-align: center; /* Center-align content */
+}
+
+#set-selection label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 10px; /* Add spacing below the label */
+}
+
+#set-selection select {
+    width: 100%; /* Full width inside the container */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#set-selection select:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 8px rgba(0, 122, 204, 0.5);
+}
+
+#main-header {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    width: 600px;
+    max-width: 90%;
+    margin: 20px auto; /* Center and add spacing */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(69, 0, 55, 0.1); /* Subtle shadow */
+    text-align: center; /* Center-align content */
+}
+
+#main-header h1 {
+    margin: 0;
+    font-size: 32px; /* Slightly reduced font size */
+    font-weight: bold;
+    text-transform: uppercase; /* Make the text uppercase */
+    background: linear-gradient(135deg, #007acc, #66bfff); /* Gradient text */
+    -webkit-background-clip: text; /* Clip the gradient to the text */
+    -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    letter-spacing: 2px; /* Add spacing between letters for elegance */
+    padding: 0px 0; /* Add padding around the text */
+    display: inline-block; /* Ensure the text is wrapped tightly */
+    /* Removed border-bottom for cleaner look */
+}
+
+#shortcuts {
+    background-color: #ffffff;
+    padding: 10px 15px; /* Reduced padding */
+    width: auto; /* Adjust width to fit content */
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 0px; /* Add spacing above the block */
+    text-align: center; /* Center-align content */
+    display: inline-block; /* Ensure the block wraps tightly around content */
+}
+
+#shortcuts h2 {
+    display: inline; /* Display the heading inline */
+    font-size: 14px; /* Match font size with the rest of the content */
+    color: #333;
+    margin-right: 10px; /* Add spacing after the heading */
+}
+
+#shortcuts span {
+    font-size: 14px;
+    color: #555;
+}
+
+#shortcuts span strong {
+    color: #007acc; /* Highlight shortcut keys */
 }
 
 @media (max-width: 600px) {

@@ -75,7 +75,7 @@ function showTranslation() {
     if (flashcards.length > 0) {
         const card = flashcards[currentCardIndex];
         const translationDiv = document.getElementById("translation");
-        translationDiv.textContent = `Tłumaczenie: ${card.word_en}`; // Display translation
+        translationDiv.textContent = `${card.word_en}`; // Display translation
         translationDiv.classList.add("visible"); // Add class to make it visible
         enableAnswerButtons();
         readAloud(card.word_en); // Read the English word aloud
@@ -117,3 +117,19 @@ function enableAnswerButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchSets);
+
+document.addEventListener("keydown", (event) => {
+    const knownButton = document.querySelector('button[onclick="markKnown(true)"]');
+    const unknownButton = document.querySelector('button[onclick="markKnown(false)"]');
+
+    if (event.code === "Space") {
+        event.preventDefault(); // Prevent default spacebar behavior (e.g., scrolling)
+        showTranslation(); // Trigger the "Pokaż tłumaczenie" button functionality
+    } else if (event.code === "Digit1" && !knownButton.disabled) {
+        event.preventDefault(); // Prevent default behavior
+        markKnown(true); // Trigger the "Znam" button functionality
+    } else if (event.code === "Digit2" && !unknownButton.disabled) {
+        event.preventDefault(); // Prevent default behavior
+        markKnown(false); // Trigger the "Nie znam" button functionality
+    }
+});
