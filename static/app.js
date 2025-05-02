@@ -13,7 +13,26 @@ async function fetchSets() {
         currentSetId = sets[0].id;
         loadFlashcards();
     }
-    displaySetStats(sets);
+
+    const userResponse = await fetch("/auth/user");
+    if (!userResponse.ok) {
+        displayStatsNote(); // Display note if the user is not logged in
+        return;
+    } else {
+        const user = await userResponse.json();
+        const userStatsResponse = await fetch(`/api/sets?user=${user.email}`);
+        const userStats = await userStatsResponse.json();
+        displaySetStats(userStats); // Display stats for the logged-in user
+    }
+}
+
+async function displayStatsNote() {
+    const statsContainer = document.getElementById("set-stats");
+    statsContainer.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr; gap: 10px; max-width: 600px; margin: 0 auto; font-weight: bold;">
+            <span>Zaloguj się żeby widzieć historię i statystyki</span>
+        </div>
+    `;
 }
 
 async function displaySetStats(sets) {
@@ -116,7 +135,42 @@ function enableAnswerButtons() {
     document.querySelector('button[onclick="markKnown(false)"]').disabled = false;
 }
 
-document.addEventListener("DOMContentLoaded", fetchSets);
+async function fetchUser() {
+    const response = await fetch("/auth/user");
+    if (response.ok) {
+        const user = await response.json();
+        const loginButton = document.querySelector(".google-login");
+        loginButton.textContent = `Zalogowany jako: ${user.email}`;
+        loginButton.href = "#"; // Disable the login link
+
+        // Add logout button
+        const logoutButton = document.createElement("a");
+        logoutButton.textContent = "Wyloguj";
+        logoutButton.classList.add("logout-button");
+        logoutButton.href = "#"; // Prevent default link behavior
+        logoutButton.onclick = (event) => {
+            event.preventDefault(); // Prevent default link behavior
+            logoutUser(); // Call the logout function
+        };
+        loginButton.parentNode.insertBefore(logoutButton, loginButton.nextSibling); // Place it after the login button
+    }
+}
+
+function logoutUser() {
+    fetch("/auth/logout", { method: "POST" })
+        .then(() => {
+            // Refresh the page to reflect the logout state
+            location.reload();
+        })
+        .catch((error) => {
+            console.error("Logout failed:", error);
+        });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchSets();
+    fetchUser(); // Fetch user info on page load
+});
 
 document.addEventListener("keydown", (event) => {
     const knownButton = document.querySelector('button[onclick="markKnown(true)"]');

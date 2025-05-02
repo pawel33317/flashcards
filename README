@@ -17,10 +17,14 @@ source venv/bin/activate
 
 python.exe -m pip install --upgrade pip
 pip install fastapi uvicorn 
+
+pip install google-auth google-auth-oauthlib requests
+pip install google-auth
 # pip install google-auth
 # pip install google-auth-oauthlib
 # pip install google-api-python-client
-
+python.exe -m pip install --upgrade pip
+pip install python-jose
 
 cd backend
 python init_db.py
@@ -28,3 +32,4 @@ python init_db.py
 cd ..
 # uvicorn backend.main:app --reload
 uvicorn main:app --reload
+

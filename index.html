@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
+
     <header id="main-header">
         <h1 id="header-title">Flashcards</h1>
     </header>
     <main>
+        <div>
+            <a href="/auth/login" class="google-login">Zaloguj się przez Google</a>
+        </div>
         <div id="set-selection">
             <label for="set-select">Zestaw:</label>
             <select id="set-select" onchange="loadFlashcards()">

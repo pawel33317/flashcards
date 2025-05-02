@@ -1,2 +1,6 @@
 __pycache__
 db/flashcards.db
+google-secret
+Secret
+google-id
+token-secret

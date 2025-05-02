@@ -262,6 +262,7 @@ button[onclick="markKnown(false)"]:active {
 }
 
 #main-header {
+    position: relative; /* Ensure the header is the positioning context */
     background-color: #ffffff; /* White background */
     padding: 20px;
     width: 600px;
@@ -317,6 +318,56 @@ button[onclick="markKnown(false)"]:active {
 
 #shortcuts span strong {
     color: #007acc; /* Highlight shortcut keys */
+}
+
+.google-login {
+
+    padding: 8px 15px; /* Adjust padding for a compact look */
+    
+    font-size: 14px;
+    color: white;
+    background-color: #4285F4; /* Google blue */
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold; /* Make the text bold */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.google-login:hover {
+    background-color: #357AE8; /* Darker Google blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Add a stronger shadow on hover */
+}
+
+.google-login:active {
+    background-color: #2A65C7; /* Even darker Google blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+.logout-button {
+    padding: 8px 15px;
+    margin: 5px;
+    font-size: 14px;
+    color: white;
+    background-color: #dc3545; /* Red color for logout */
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold; /* Make the text bold */
+    z-index: 1000; /* Ensure it stays above other elements */
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Darker red */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Add a stronger shadow on hover */
+}
+
+.logout-button:active {
+    background-color: #bd2130; /* Even darker red */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
 }
 
 @media (max-width: 600px) {
