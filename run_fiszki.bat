@@ -4,7 +4,7 @@
 cd /d D:\fiszki
 
 :: Start the application in a new terminal
-start cmd /k "uvicorn main:app --reload"
+start cmd /k "uvicorn app:app --reload"
 
 :: Wait for the server to start
 timeout /t 3 > nul
