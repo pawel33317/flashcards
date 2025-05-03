@@ -116,6 +116,17 @@ main > div > select:focus {
     border-color: #005f99; /* Darker blue on focus */
     box-shadow: 0 0 8px rgba(0, 95, 153, 0.5); /* Glow effect on focus */
 }
+#reset_set {
+    color: rgb(209, 126, 42);
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#reset_set:hover {
+    color: rgb(198, 9, 9);
+    text-decoration: none;
+}
 
 #set-stats {
     background-color: #ffffff;
@@ -267,7 +278,7 @@ button[onclick="markKnown(false)"]:active {
     padding: 20px;
     width: 600px;
     max-width: 90%;
-    margin: 20px auto; /* Center and add spacing */
+    margin-bottom: 20px auto; /* Center and add spacing */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 6px rgba(69, 0, 55, 0.1); /* Subtle shadow */
     text-align: center; /* Center-align content */
@@ -275,7 +286,7 @@ button[onclick="markKnown(false)"]:active {
 
 #main-header h1 {
     margin: 0;
-    font-size: 32px; /* Slightly reduced font size */
+    font-size: 30px; /* Slightly reduced font size */
     font-weight: bold;
     text-transform: uppercase; /* Make the text uppercase */
     background: linear-gradient(135deg, #007acc, #66bfff); /* Gradient text */
@@ -320,10 +331,35 @@ button[onclick="markKnown(false)"]:active {
     color: #007acc; /* Highlight shortcut keys */
 }
 
-.google-login {
 
+.revert-button {
     padding: 8px 15px; /* Adjust padding for a compact look */
-    
+    font-size: 14px;
+    color: white;
+    background-color: #5fb251; /* Google blue */
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold; /* Make the text bold */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.revert-button:hover {
+    background-color: #59ab4a; /* Darker Google blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Add a stronger shadow on hover */
+}
+
+.revert-button:active {
+    background-color: #1d7020; /* Even darker Google blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
+
+
+
+.google-login {
+    padding: 8px 15px; /* Adjust padding for a compact look */
     font-size: 14px;
     color: white;
     background-color: #4285F4; /* Google blue */

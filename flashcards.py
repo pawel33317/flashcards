@@ -103,3 +103,24 @@ def update_stats(stat: StatUpdate, access_token: str = Cookie(None)):
 
     conn.commit()
     return {"status": "ok"}
+
+
+@flashcards_router.get("/resetSet")
+def update_stats(set_id: int, access_token: str = Cookie(None)):
+    print("resetSet")
+    if not access_token:
+        raise HTTPException(status_code=403, detail="Not authenticated")
+
+    token_data = verify_token(access_token)
+    user_id = token_data.get("user_id")
+    conn = get_db()
+
+    conn.execute("""
+        DELETE FROM stats 
+        WHERE user_id = ? AND card_id IN (
+            SELECT id FROM flashcards WHERE set_id = ?
+        )
+    """, (user_id, set_id))
+
+    conn.commit()
+    return {"status": "ok"}

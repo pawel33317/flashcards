@@ -3,6 +3,8 @@
 let currentSetId = null;
 let flashcards = [];
 let currentCardIndex = 0;
+let revertEnable = false;
+
 
 async function fetchSets() {
     const response = await fetch("/api/sets");
@@ -38,24 +40,35 @@ async function displayStatsNote() {
 async function displaySetStats(sets) {
     const statsContainer = document.getElementById("set-stats");
     statsContainer.innerHTML = `
-        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 10px; max-width: 600px; margin: 0 auto; font-weight: bold;">
+        <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr; gap: 10px; max-width: 600px; margin: 0 auto; font-weight: bold;">
             <span>Zestaw</span>
             <span>Słowa</span>
             <span>Znam</span>
             <span>Nie znam</span>
             <span>Nowe</span>
+            <span>Opcje</span>
         </div>
     `;
     for (const set of sets) {
         statsContainer.innerHTML += `
-            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 10px; max-width: 600px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr; gap: 10px; max-width: 600px; margin: 0 auto;">
                 <span><b>${set.name}</b></span>
                 <span>${set.total}</span>
                 <span>${set.known}</span>
                 <span>${set.unknown}</span>
                 <span>${set.new}</span>
+                <span><a href="" id="reset_set" onclick="resetSet(${set.id})" >Reset</a></span>
             </div>
         `;
+    }
+}
+
+async function resetSet(id) {
+    const response = await fetch(`/api/resetSet?set_id=${id}`);
+    if (response.ok) {
+        fetchSets()
+    } else {
+        alert("Nie można zresetować zestawu.");
     }
 }
 
@@ -68,6 +81,13 @@ async function loadFlashcards() {
     updateFlashcardCount(); // Update the count display
     showCard();
     disableAnswerButtons();
+}
+
+function revert(){
+    revertEnable = !revertEnable;
+    const revertButton = document.querySelector(".revert-button");
+    revertButton.textContent = revertEnable ? "Pokaż polski" : "Pokaż angielski";
+    fetchSets();
 }
 
 function updateFlashcardCount() {
@@ -84,7 +104,11 @@ function showCard() {
         translationDiv.classList.remove("visible"); // Hide translation
     } else {
         const card = flashcards[currentCardIndex];
-        cardDiv.textContent = card.word_pl;
+        if (revertEnable) {
+            cardDiv.textContent = card.word_en; // Show English word first
+        } else {
+            cardDiv.textContent = card.word_pl; // Show Polish word first
+        }
         translationDiv.textContent = ""; // Clear translation
         translationDiv.classList.remove("visible"); // Hide translation
     }
@@ -94,7 +118,11 @@ function showTranslation() {
     if (flashcards.length > 0) {
         const card = flashcards[currentCardIndex];
         const translationDiv = document.getElementById("translation");
-        translationDiv.textContent = `${card.word_en}`; // Display translation
+        if (revertEnable) {
+            translationDiv.textContent = `${card.word_pl}`; // Display translation
+        } else {
+            translationDiv.textContent = `${card.word_en}`; // Display translation
+        }
         translationDiv.classList.add("visible"); // Add class to make it visible
         enableAnswerButtons();
         readAloud(card.word_en); // Read the English word aloud
