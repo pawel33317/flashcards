@@ -5,12 +5,27 @@ let flashcards = [];
 let currentCardIndex = 0;
 let revertEnable = false;
 
-
 async function fetchSets() {
     const response = await fetch("/api/sets");
     const sets = await response.json();
     const setSelect = document.getElementById("set-select");
     setSelect.innerHTML = sets.map(set => `<option value="${set.id}">${set.name}</option>`).join("");
+
+    const savedSetId = localStorage.getItem("selectedSetId");
+    if (savedSetId) {
+        currentSetId = savedSetId;
+        setSelect.value = savedSetId;
+    } else if (sets.length > 0) {
+        currentSetId = sets[0].id;
+        setSelect.value = sets[0].id;
+    }
+
+    setSelect.addEventListener("change", () => {
+        alert("Zmieniono zestaw!");
+        localStorage.setItem("selectedSetId", setSelect.value);
+        loadFlashcards();
+    });
+
     if (sets.length > 0) {
         currentSetId = sets[0].id;
         loadFlashcards();
