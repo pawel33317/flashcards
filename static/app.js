@@ -21,7 +21,6 @@ async function fetchSets() {
     }
 
     setSelect.addEventListener("change", () => {
-        alert("Zmieniono zestaw!");
         localStorage.setItem("selectedSetId", setSelect.value);
         loadFlashcards();
     });
