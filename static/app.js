@@ -250,14 +250,26 @@ document.addEventListener("keydown", (event) => {
 
 document.querySelector('#custom-translation input').addEventListener('input', function() {
     const inputField = this;
-    const inputValue = inputField.value.trim();
+    let inputValue = inputField.value;
     const card = flashcards[currentCardIndex];
+
+    // Replace all incorrect '[' characters with the corresponding characters from the card
+    const activeWord = revertEnable ? card.word_pl : card.word_en;
+    let correctedValue = '';
+    for (let i = 0; i < inputValue.length && i < activeWord.length; i++) {
+        if (inputValue[inputValue.length-1] === '[') {
+            correctedValue += activeWord[i];
+        } else {
+            correctedValue += inputValue[i];
+        }
+    }
+    inputValue = correctedValue;
+    inputField.value = inputValue; // Update the input field
 
     if (!inputValue) {
         inputField.classList.remove('match', 'no-match');
         inputField.classList.add('empty');
     } else {
-        const activeWord = revertEnable ? card.word_pl : card.word_en;
         if (activeWord.startsWith(inputValue)) {
             inputField.classList.remove('empty', 'no-match');
             inputField.classList.add('match');
