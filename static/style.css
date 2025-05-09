@@ -222,9 +222,9 @@ button[onclick="markKnown(false)"]:active {
     margin-bottom: 20px; /* Added bottom margin for separation */
     font-size: 18px; /* Increased font size for readability */
     color: #333; /* Darker text color for contrast */
-    background-color: #f9f9f9; /* Light gray background */
+    background-color: #d7f8d2; /* Light gray background */
     padding: 15px; /* Added padding for better readability */
-    border: 2px solid #007acc; /* Blue border for emphasis */
+    
     border-radius: 8px; /* Rounded corners for a modern look */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     min-height: 20px;
@@ -407,6 +407,35 @@ button[onclick="markKnown(false)"]:active {
     background-color: #bd2130; /* Even darker red */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
 }
+
+#custom-translation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto 20px auto; /* Center the container */
+}
+
+#custom-translation input {
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    padding: 15px !important;
+    font-size: 20px !important; /* Wymuszenie zastosowania rozmiaru czcionki */
+    border: 2px solid #007acc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#custom-translation input:focus {
+    outline: none;
+    border-color: #005f99;
+    box-shadow: 0 0 8px rgba(0, 95, 153, 0.5);
+}
+
+
 
 @media (max-width: 600px) {
     #flashcards {
