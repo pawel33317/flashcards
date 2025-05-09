@@ -125,6 +125,11 @@ function updateFlashcardCount() {
 function showCard() {
     const cardDiv = document.getElementById("card");
     const translationDiv = document.getElementById("translation");
+    const customTranslationInput = document.querySelector("#custom-translation input");
+    customTranslationInput.value = ""; // Clear the input field
+    customTranslationInput.classList.remove('match', 'no-match');
+    customTranslationInput.classList.add('empty');
+
     if (flashcards.length === 0) {
         cardDiv.textContent = "Brak fiszek w tym zestawie.";
         translationDiv.textContent = ""; // Clear translation
@@ -240,5 +245,28 @@ document.addEventListener("keydown", (event) => {
     } else if (event.code === "Digit2" && !unknownButton.disabled) {
         event.preventDefault(); // Prevent default behavior
         markKnown(false); // Trigger the "Nie znam" button functionality
+    }
+});
+
+document.querySelector('#custom-translation input').addEventListener('input', function() {
+    const inputField = this;
+    const inputValue = inputField.value.trim();
+    const card = flashcards[currentCardIndex];
+
+    if (!inputValue) {
+        inputField.classList.remove('match', 'no-match');
+        inputField.classList.add('empty');
+    } else {
+        const activeWord = revertEnable ? card.word_pl : card.word_en;
+        if (activeWord.startsWith(inputValue)) {
+            inputField.classList.remove('empty', 'no-match');
+            inputField.classList.add('match');
+            if (inputValue === activeWord) {
+                showTranslation();
+            }
+        } else {
+            inputField.classList.remove('empty', 'match');
+            inputField.classList.add('no-match');
+        }
     }
 });

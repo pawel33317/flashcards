@@ -435,7 +435,17 @@ button[onclick="markKnown(false)"]:active {
     box-shadow: 0 0 8px rgba(0, 95, 153, 0.5);
 }
 
+#custom-translation input.empty {
+    border-color: rgb(44, 127, 250);
+}
 
+#custom-translation input.match {
+    border-color: rgb(120, 222, 120);
+}
+
+#custom-translation input.no-match {
+    border-color: rgb(255, 80, 80);
+}
 
 @media (max-width: 600px) {
     #flashcards {
