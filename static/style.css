@@ -424,7 +424,7 @@ button[onclick="markKnown(false)"]:active {
     font-size: 20px !important; /* Wymuszenie zastosowania rozmiaru czcionki */
     border: 2px solid #007acc;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
