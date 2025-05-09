@@ -138,6 +138,8 @@ main > div > select:focus {
     font-size: 14px;
     color: #555;
     line-height: 1.5;
+    max-height: 400px; /* Set a maximum height for the container */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
 }
 
 #set-stats div {
