@@ -29,7 +29,10 @@ async function fetchSets() {
         currentSetId = sets[0].id;
         loadFlashcards();
     }
+    displayStats();
 
+}
+async function displayStats() {
     const userResponse = await fetch("/auth/user");
     if (!userResponse.ok) {
         displayStatsNote(); // Display note if the user is not logged in
@@ -41,6 +44,7 @@ async function fetchSets() {
         displaySetStats(userStats); // Display stats for the logged-in user
     }
 }
+
 
 async function displayStatsNote() {
     const statsContainer = document.getElementById("set-stats");

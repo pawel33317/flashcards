@@ -130,9 +130,9 @@ main > div > select:focus {
 
 #set-stats {
     background-color: #ffffff;
-    padding: 20px;
+    padding-top: 20px;
     width: 600px;
-    max-width: 90%;
+    max-width: 100%;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     font-size: 14px;
