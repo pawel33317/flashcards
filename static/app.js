@@ -23,6 +23,7 @@ async function fetchSets() {
     setSelect.addEventListener("change", () => {
         localStorage.setItem("selectedSetId", setSelect.value);
         loadFlashcards();
+        displayStats();
     });
 
     if (sets.length > 0) {
@@ -56,6 +57,14 @@ async function displayStatsNote() {
 }
 
 async function displaySetStats(sets) {
+    const savedSetId = localStorage.getItem("selectedSetId");
+    if (savedSetId) {
+        sets.sort((a, b) => {
+            if (a.id == savedSetId) return -1;
+            if (b.id == savedSetId) return 1;
+            return 0;
+        });
+    }
     const statsContainer = document.getElementById("set-stats");
     statsContainer.innerHTML = `
         <div style="display: grid; grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr; gap: 10px; max-width: 600px; margin: 0 auto; font-weight: bold;">
