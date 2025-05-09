@@ -236,7 +236,7 @@ document.addEventListener("keydown", (event) => {
     const knownButton = document.querySelector('button[onclick="markKnown(true)"]');
     const unknownButton = document.querySelector('button[onclick="markKnown(false)"]');
 
-    if (event.code === "Space") {
+    if (event.code === "Enter") {
         event.preventDefault(); // Prevent default spacebar behavior (e.g., scrolling)
         showTranslation(); // Trigger the "Pokaż tłumaczenie" button functionality
     } else if (event.code === "Digit1" && !knownButton.disabled) {
