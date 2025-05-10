@@ -262,7 +262,7 @@ document.querySelector('#custom-translation input').addEventListener('input', fu
     const activeWord = revertEnable ? card.word_pl : card.word_en;
     let correctedValue = '';
     for (let i = 0; i < inputValue.length && i < activeWord.length; i++) {
-        if (inputValue[inputValue.length-1] === '\\') {
+        if (inputValue[inputValue.length-1] === '\\' || inputValue[inputValue.length-1] === '[' || inputValue[inputValue.length-1] === ']') {
             correctedValue += activeWord[i];
         } else {
             correctedValue += inputValue[i];
