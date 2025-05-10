@@ -65,7 +65,7 @@ def get_flashcards(set_id: int, access_token: str = Cookie(None)):
 
 class StatUpdate(BaseModel):
     card_id: int
-    known: bool
+    known: int
 
 @flashcards_router.post("/stats")
 def update_stats(stat: StatUpdate, access_token: str = Cookie(None)):
@@ -75,6 +75,17 @@ def update_stats(stat: StatUpdate, access_token: str = Cookie(None)):
     user_id = token_data.get("user_id")
     conn = get_db()
 
+    point_value = 0
+    if stat.known == 1:
+        point_value = 1
+        print("point_value = 1")
+    elif stat.known == -1:
+        print("point_value = -1")
+        point_value = -1
+    elif stat.known == -2:
+        print("point_value = -2")
+        point_value = -2
+
     existing_stat = conn.execute("""
         SELECT known 
         FROM stats 
@@ -82,24 +93,16 @@ def update_stats(stat: StatUpdate, access_token: str = Cookie(None)):
     """, (stat.card_id, user_id)).fetchone()
 
     if existing_stat:
-        if stat.known:
-            conn.execute("""
-                UPDATE stats 
-                SET known = known + 1 
-                WHERE card_id = ? AND user_id = ?
-            """, (stat.card_id, user_id))
-        else:
-            conn.execute("""
-                UPDATE stats 
-                SET known = known - 2 
-                WHERE card_id = ? AND user_id = ?
-            """, (stat.card_id, user_id))
+        conn.execute("""
+            UPDATE stats 
+            SET known = known + ?
+            WHERE card_id = ? AND user_id = ?
+            """, (point_value, stat.card_id, user_id))
     else:
-        initial_value = 1 if stat.known else -2
         conn.execute("""
             INSERT INTO stats (card_id, user_id, known) 
             VALUES (?, ?, ?)
-        """, (stat.card_id, user_id, initial_value))
+        """, (stat.card_id, user_id, point_value))
 
     conn.commit()
     return {"status": "ok"}

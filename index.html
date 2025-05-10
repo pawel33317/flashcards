@@ -33,8 +33,9 @@
             <div id="translation"></div> <!-- New div for translation -->
             <div class="buttons">
                 <button onclick="showTranslation()">Pokaż tłumaczenie</button>
-                <button onclick="markKnown(true)">Znam</button>
-                <button onclick="markKnown(false)">Nie znam</button>
+                <button onclick="markKnown(1)">Znam</button>
+                <button onclick="markKnown(-1)">Średnio</button>
+                <button onclick="markKnown(-2)">Nie znam</button>
             </div>
         </div>
         <div id="set-selection">     
@@ -45,11 +46,12 @@
         </div>
 
         <div id="shortcuts">
-            <h2>Skróty klawiaturowe:</h2>
+            <h2>Skróty:</h2>
             <span><strong>Enter:</strong> Pokaż tłumaczenie, </span>
-            <span><strong>1:</strong> Znam, </span>
+            <span><strong>1:</strong> Znam</span>
+            <span><strong>2:</strong> Może</span>
             <span><strong>2:</strong> Nie znam</span>
-            <span><strong>[\]:</strong> Podpowiedz literę</span>
+            <span><strong>[:</strong> Podpowiedz</span>
         </div>
     </main>
     <script src="static/app.js"></script>

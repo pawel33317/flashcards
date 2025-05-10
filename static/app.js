@@ -191,13 +191,15 @@ async function markKnown(known) {
 }
 
 function disableAnswerButtons() {
-    document.querySelector('button[onclick="markKnown(true)"]').disabled = true;
-    document.querySelector('button[onclick="markKnown(false)"]').disabled = true;
+    document.querySelector('button[onclick="markKnown(1)"]').disabled = true;
+    document.querySelector('button[onclick="markKnown(-1)"]').disabled = true;
+    document.querySelector('button[onclick="markKnown(-2)"]').disabled = true;
 }
 
 function enableAnswerButtons() {
-    document.querySelector('button[onclick="markKnown(true)"]').disabled = false;
-    document.querySelector('button[onclick="markKnown(false)"]').disabled = false;
+    document.querySelector('button[onclick="markKnown(1)"]').disabled = false;
+    document.querySelector('button[onclick="markKnown(-1)"]').disabled = false;
+    document.querySelector('button[onclick="markKnown(-2)"]').disabled = false;
 }
 
 async function fetchUser() {
@@ -238,18 +240,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("keydown", (event) => {
-    const knownButton = document.querySelector('button[onclick="markKnown(true)"]');
-    const unknownButton = document.querySelector('button[onclick="markKnown(false)"]');
+    const knownButton = document.querySelector('button[onclick="markKnown(1)"]');
+    const maybeButton = document.querySelector('button[onclick="markKnown(-1)"]');
+    const unknownButton = document.querySelector('button[onclick="markKnown(-2)"]');
 
     if (event.code === "Enter") {
         event.preventDefault(); // Prevent default spacebar behavior (e.g., scrolling)
         showTranslation(); // Trigger the "Pokaż tłumaczenie" button functionality
     } else if (event.code === "Digit1" && !knownButton.disabled) {
         event.preventDefault(); // Prevent default behavior
-        markKnown(true); // Trigger the "Znam" button functionality
-    } else if (event.code === "Digit2" && !unknownButton.disabled) {
+        markKnown(1); // Trigger the "Znam" button functionality
+    } else if (event.code === "Digit2" && !maybeButton.disabled) {
         event.preventDefault(); // Prevent default behavior
-        markKnown(false); // Trigger the "Nie znam" button functionality
+        markKnown(-1); // Trigger the "Nie znam" button functionality
+    } else if (event.code === "Digit3" && !unknownButton.disabled) {
+        event.preventDefault(); // Prevent default behavior
+        markKnown(-2); // Trigger the "Nie znam" button functionality
     }
 });
 

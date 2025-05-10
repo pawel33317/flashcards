@@ -192,29 +192,42 @@ button:disabled {
 }
 
 /* Specific styles for "Znam" button */
-button[onclick="markKnown(true)"] {
+button[onclick="markKnown(1)"] {
     background-color: #28a745; /* Nice green */
 }
 
-button[onclick="markKnown(true)"]:hover {
+button[onclick="markKnown(1)"]:hover {
     background-color: #218838; /* Darker green */
 }
 
-button[onclick="markKnown(true)"]:active {
+button[onclick="markKnown(1)"]:active {
     background-color: #1e7e34; /* Even darker green */
 }
 
 /* Specific styles for "Nie znam" button */
-button[onclick="markKnown(false)"] {
+button[onclick="markKnown(-2)"] {
     background-color: #dc3545; /* Nice red */
 }
 
-button[onclick="markKnown(false)"]:hover {
+button[onclick="markKnown(-2)"]:hover {
     background-color: #c82333; /* Darker red */
 }
 
-button[onclick="markKnown(false)"]:active {
+button[onclick="markKnown(-2)"]:active {
     background-color: #bd2130; /* Even darker red */
+}
+
+/* Specific styles for "Nie znam" button */
+button[onclick="markKnown(-1)"] {
+    background-color: #dca735; /* Nice red */
+}
+
+button[onclick="markKnown(-1)"]:hover {
+    background-color: #c88e23; /* Darker red */
+}
+
+button[onclick="markKnown(-1)"]:active {
+    background-color: #c08c1c; /* Even darker red */
 }
 
 #translation {
