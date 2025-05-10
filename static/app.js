@@ -247,15 +247,15 @@ document.addEventListener("keydown", (event) => {
     if (event.code === "Enter") {
         event.preventDefault(); // Prevent default spacebar behavior (e.g., scrolling)
         showTranslation(); // Trigger the "Pokaż tłumaczenie" button functionality
-    } else if (event.code === "Digit1" && !knownButton.disabled) {
+    } else if (event.code === "Digit1" && !unknownButton.disabled) {
         event.preventDefault(); // Prevent default behavior
-        markKnown(1); // Trigger the "Znam" button functionality
+        markKnown(-2); // Trigger the "Znam" button functionality
     } else if (event.code === "Digit2" && !maybeButton.disabled) {
         event.preventDefault(); // Prevent default behavior
         markKnown(-1); // Trigger the "Nie znam" button functionality
-    } else if (event.code === "Digit3" && !unknownButton.disabled) {
+    } else if (event.code === "Digit3" && !knownButton.disabled) {
         event.preventDefault(); // Prevent default behavior
-        markKnown(-2); // Trigger the "Nie znam" button functionality
+        markKnown(1); // Trigger the "Nie znam" button functionality
     }
 });
 

@@ -28,14 +28,14 @@
             <h2 id="set-title">Twoje fiszki</h2>
             <div id="card"></div>
             <div id="custom-translation">
-                <input type="text" placeholder="Wprowadź tłumaczenie"/>
+                <input type="text" placeholder="Wprowadź tłumaczenie, podpowiedź znak ["/>
             </div>
             <div id="translation"></div> <!-- New div for translation -->
             <div class="buttons">
-                <button onclick="showTranslation()">Pokaż tłumaczenie</button>
-                <button onclick="markKnown(1)">Znam</button>
-                <button onclick="markKnown(-1)">Średnio</button>
-                <button onclick="markKnown(-2)">Nie znam</button>
+                <button onclick="showTranslation()">Pokaż tłumaczenie &#9166</button>
+                <button onclick="markKnown(-2)">Nie znam &#10102</button>
+                <button onclick="markKnown(-1)">Średnio &#10103</button>
+                <button onclick="markKnown(1)">Znam &#10104</button>
             </div>
         </div>
         <div id="set-selection">     
@@ -48,9 +48,9 @@
         <div id="shortcuts">
             <h2>Skróty:</h2>
             <span><strong>Enter:</strong> Pokaż tłumaczenie, </span>
-            <span><strong>1:</strong> Znam</span>
+            <span><strong>1:</strong> Nie znam</span>
             <span><strong>2:</strong> Może</span>
-            <span><strong>2:</strong> Nie znam</span>
+            <span><strong>3:</strong> Znam</span>
             <span><strong>[:</strong> Podpowiedz</span>
         </div>
     </main>
