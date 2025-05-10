@@ -4,6 +4,7 @@ let currentSetId = null;
 let flashcards = [];
 let currentCardIndex = 0;
 let revertEnable = false;
+let translactionAlreadyShown = false;
 
 async function fetchSets() {
     const response = await fetch("/api/sets");
@@ -123,6 +124,7 @@ function updateFlashcardCount() {
 }
 
 function showCard() {
+    translactionAlreadyShown = false;
     const cardDiv = document.getElementById("card");
     const translationDiv = document.getElementById("translation");
     const customTranslationInput = document.querySelector("#custom-translation input");
@@ -144,9 +146,12 @@ function showCard() {
         translationDiv.textContent = ""; // Clear translation
         translationDiv.classList.remove("visible"); // Hide translation
     }
+
+    customTranslationInput.focus(); // Set focus on the input field
 }
 
 function showTranslation() {
+    translactionAlreadyShown = true;
     if (flashcards.length > 0) {
         const card = flashcards[currentCardIndex];
         const translationDiv = document.getElementById("translation");
@@ -257,7 +262,7 @@ document.querySelector('#custom-translation input').addEventListener('input', fu
     const activeWord = revertEnable ? card.word_pl : card.word_en;
     let correctedValue = '';
     for (let i = 0; i < inputValue.length && i < activeWord.length; i++) {
-        if (inputValue[inputValue.length-1] === '[') {
+        if (inputValue[inputValue.length-1] === '\\') {
             correctedValue += activeWord[i];
         } else {
             correctedValue += inputValue[i];
@@ -273,7 +278,7 @@ document.querySelector('#custom-translation input').addEventListener('input', fu
         if (activeWord.startsWith(inputValue)) {
             inputField.classList.remove('empty', 'no-match');
             inputField.classList.add('match');
-            if (inputValue === activeWord) {
+            if (inputValue === activeWord && !translactionAlreadyShown) {
                 showTranslation();
             }
         } else {
