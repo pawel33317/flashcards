@@ -281,10 +281,10 @@ document.querySelector('#custom-translation input').addEventListener('input', fu
         inputField.classList.remove('match', 'no-match');
         inputField.classList.add('empty');
     } else {
-        if (activeWord.startsWith(inputValue)) {
+        if (activeWord.toLowerCase().startsWith(inputValue.toLowerCase())) {
             inputField.classList.remove('empty', 'no-match');
             inputField.classList.add('match');
-            if (inputValue === activeWord && !translactionAlreadyShown) {
+            if (inputValue.toLowerCase() === activeWord.toLowerCase() && !translactionAlreadyShown) {
                 showTranslation();
             }
         } else {
