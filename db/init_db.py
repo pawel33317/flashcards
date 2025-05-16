@@ -53,4 +53,4 @@ for script in os.listdir(current_dir):
     if script.startswith("add_") and script.endswith(".py"):
         script_path = os.path.join(current_dir, script)
         print(f"Executing {script_path}...")
-        subprocess.run(["python", script_path], check=True)
+        subprocess.run(["python3", script_path], check=True)

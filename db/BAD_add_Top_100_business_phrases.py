@@ -1,0 +1,123 @@
+import sqlite3
+
+conn = sqlite3.connect("flashcards.db")
+cursor = conn.cursor()
+
+# Przykładowy zestaw i fiszki
+set_name = "Top 100 business phrases"
+
+cursor.execute("INSERT INTO sets (name) VALUES (?)", (set_name,))
+
+# Pobierz ID zestawu "Top 100 Business phrases"
+cursor.execute("SELECT id FROM sets WHERE name = ?", (set_name,))
+set_id = cursor.fetchone()[0]
+
+flashcards = [
+    ("nawiąż kontakt", "get in touch"),
+    ("skontaktuj się", "reach out"),
+    ("zadzwoń do mnie", "ping me"),
+    ("prześlij mi maila", "shoot me an email"),
+    ("będziemy w kontakcie", "keep me in the loop"),
+    ("włącz mnie do korespondencji", "loop me in"),
+    ("odpisz jak najszybciej", "respond ASAP"),
+    ("daj znać", "let me know"),
+    ("prześlij informację zwrotną", "follow up"),
+    ("odpisz mi", "get back to me"),
+    ("daj mi znać", "drop me a line"),
+    ("nie wahaj się skontaktować", "don't hesitate to contact me"),
+    ("chętnie podtrzymam kontakt", "feel free to connect"),
+    ("znajdziesz mnie pod numerem", "reach me at"),
+    ("zadzwoń później", "call me back"),
+    ("ustalmy termin spotkania", "let's connect"),
+    ("omówmy to później", "circle back"),
+    ("skontaktuję się z tobą", "I'll get in touch"),
+    ("omawiamy dalej", "let's touch base"),
+    ("bądź na bieżąco", "stay tuned"),
+    ("umów spotkanie", "schedule a meeting"),
+    ("zwołaj spotkanie", "call a meeting"),
+    ("rozpocznij spotkanie", "kick off"),
+    ("ustaw porządek obrad", "set the agenda"),
+    ("podsumujmy", "wrap up"),
+    ("skończmy na dziś", "call it a day"),
+    ("oto najważniejsze punkty", "action items"),
+    ("trzymajmy się harmonogramu", "time is of the essence"),
+    ("wszyscy na pokład", "all hands on deck"),
+    ("czas twarzą w twarz", "face time"),
+    ("zgodzimy się co do...", "on the same page"),
+    ("zróbmy burzę mózgów", "brainstorm"),
+    ("zagłębmy się w szczegóły", "deep dive"),
+    ("przeprowadź warsztat", "workshop"),
+    ("zrób notatki", "minute the meeting"),
+    ("przeanalizujmy to offline", "take it offline"),
+    ("ustawmy wideokonferencję", "set up a video call"),
+    ("zaproszę wszystkich", "invite everyone"),
+    ("omówimy to później", "table this for now"),
+    ("spotkajmy się w cztery oczy", "one-on-one"),
+    ("rozpocznijmy realizację", "get the ball rolling"),
+    ("przesuń wskaźnik", "move the needle"),
+    ("myśl nieszablonowo", "think outside the box"),
+    ("zmień kierunek", "pivot"),
+    ("przeprowadź analizę SWOT", "conduct a SWOT analysis"),
+    ("zrób due diligence", "do due diligence"),
+    ("przygotuj plan działania", "draft a roadmap"),
+    ("zapewnij skalowalność", "ensure scalability"),
+    ("wyznacz kamienie milowe", "set milestones"),
+    ("optymalizuj procesy", "streamline processes"),
+    ("wykorzystaj zasoby", "leverage resources"),
+    ("ustal priorytety", "prioritize tasks"),
+    ("przewiduj ryzyka", "anticipate risks"),
+    ("zoptymalizuj koszty", "optimize costs"),
+    ("przejdź do kolejnego etapu", "take it to the next level"),
+    ("przygotuj biznesowy case", "build a business case"),
+    ("zmniejsz liczbę błędów", "reduce errors"),
+    ("przygotuj się na przyszłość", "plan ahead"),
+    ("utrzymaj konkurencyjność", "stay ahead of the curve"),
+    ("zrób prognozę", "make a forecast"),
+    ("podejmij decyzję", "make a decision"),
+    ("rozważ opcje", "weigh the options"),
+    ("uzyskaj akceptację", "get sign-off"),
+    ("zamknij temat", "close the loop"),
+    ("przekaż informację zwrotną", "give feedback"),
+    ("prześlij aktualizację statusu", "provide a status update"),
+    ("przypomnienie", "heads up"),
+    ("wyślij informacje", "send the details"),
+    ("ustal termin wykonania", "set a deadline"),
+    ("zleć wykonanie", "delegate the task"),
+    ("bądź odpowiedzialny", "take ownership"),
+    ("rozlicz się z wyników", "report back"),
+    ("podsumuj wnioski", "debrief"),
+    ("przeanalizuj wyniki", "review the outcomes"),
+    ("zamknij raport", "finalize the report"),
+    ("wdróż rekomendacje", "implement recommendations"),
+    ("narysuj wnioski", "draw conclusions"),
+    ("zaplanuj kolejny krok", "plan the next step"),
+    ("udokumentuj proces", "document the process"),
+    ("naucz się na błędach", "capture lessons learned"),
+    ("daj z siebie więcej", "go the extra mile"),
+    ("ponad oczekiwania", "above and beyond"),
+    ("sytuacja korzystna dla obu stron", "win-win situation"),
+    ("współdziałanie", "synergy"),
+    ("ogranicz zasoby", "manage bandwidth"),
+    ("szybkie zwycięstwo", "quick win"),
+    ("łatwy cel", "low-hanging fruit"),
+    ("przełomowy pomysł", "game changer"),
+    ("kluczowe wskaźniki", "key performance indicators"),
+    ("zwrot z inwestycji", "return on investment"),
+    ("gotowe rezultaty", "deliverables"),
+    ("kamienie milowe", "milestones"),
+    ("budżet", "budget"),
+    ("przegląd wydajności", "performance review"),
+    ("nagradzaj sukcesy", "recognize achievements"),
+    ("zmierz postępy", "track progress"),
+    ("trzymaj się kryteriów", "adhere to guidelines"),
+    ("ucząca się organizacja", "learning organization"),
+    ("motywuj zespół", "motivate the team"),
+    ("zapewnij wsparcie", "provide support"),
+]
+
+cursor.executemany("INSERT INTO flashcards (word_pl, word_en, set_id) VALUES (?, ?, ?)", [(word_pl, word_en, set_id) for word_pl, word_en in flashcards])
+
+conn.commit()
+conn.close()
+
+print("Baza danych została zaktualizowana i wypełniona przykładowymi danymi.")

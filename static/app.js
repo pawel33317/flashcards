@@ -275,6 +275,56 @@ document.querySelector('#custom-translation input').addEventListener('input', fu
         }
     }
     inputValue = correctedValue;
+
+    // Special case: if user types ' am' but the correct answer is ''m' at the same position, auto-correct it
+    if (inputValue.endsWith(' am')) {
+        const idx = inputValue.length - 3; // index where ' am' starts
+        if (activeWord.slice(idx, idx + 2) === "'m") {
+            inputValue = inputValue.slice(0, idx) + "'m";
+        }
+    }
+    if (inputValue.endsWith(' will')) {
+        const idx = inputValue.length - 5; // index where ' am' starts
+        if (activeWord.slice(idx, idx + 3) === "'ll") {
+            inputValue = inputValue.slice(0, idx) + "'ll";
+        }
+    }
+    if (inputValue.endsWith(' is')) {
+        const idx = inputValue.length - 3; // index where ' am' starts
+        if (activeWord.slice(idx, idx + 2) === "'s") {
+            inputValue = inputValue.slice(0, idx) + "'s";
+        }
+    }
+    if (inputValue.endsWith(' not')) {    // doesn't   does not
+        const idx = inputValue.length - 4; // index where ' am' starts
+        if (activeWord.slice(idx, idx + 3) === "n't") {
+            inputValue = inputValue.slice(0, idx) + "n't";
+        }
+    }
+    // Zamiana małej litery na dużą jeśli w tłumaczeniu jest duża
+    let finalValue = '';
+    for (let i = 0; i < inputValue.length && i < activeWord.length; i++) {
+        if (
+            inputValue[i] &&
+            inputValue[i].toLowerCase() === activeWord[i].toLowerCase() &&
+            inputValue[i] !== activeWord[i]
+        ) {
+            finalValue += activeWord[i];
+        } else {
+            finalValue += inputValue[i];
+        }
+    }
+    inputValue = finalValue;
+    // Special case: if only one character left to enter and it's '?', auto-complete it
+    if (inputValue.length === activeWord.length - 1 && activeWord.endsWith('?')) {
+        inputValue = inputValue + '?';
+    }
+    if (inputValue.length === activeWord.length - 1 && activeWord.endsWith('!')) {
+        inputValue = inputValue + '!';
+    }
+    if (inputValue.length === activeWord.length - 1 && activeWord.endsWith('.')) {
+        inputValue = inputValue + '.';
+    }
     inputField.value = inputValue; // Update the input field
 
     if (!inputValue) {

@@ -4,7 +4,7 @@ conn = sqlite3.connect("flashcards.db")
 cursor = conn.cursor()
 
 # Przykładowy zestaw i fiszki
-set_name = "Top 500"
+set_name = "Top 500 words and phrases"
 
 cursor.execute("INSERT INTO sets (name) VALUES (?)", (set_name,))
 
